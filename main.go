@@ -27,6 +27,8 @@ func main() {
 		panic("数据库连接错误，请检查配置")
 	}
 
+	写在main函数中不符合分包思想（MVC），所以新建一个包db_mysql,将代码写进里面。
+
 	 */
 
 	beego.Run()

@@ -28,3 +28,38 @@ func (c *MainController) Get() {
 	}
 	c.Ctx.WriteString("恭喜，数据校验成功。")
 }
+/*     //post第一种方法
+func (c *MainController) Post()  {
+	//post请求form
+	//var re models.Respon
+	name := c.Ctx.Request.FormValue("name")
+	age := c.Ctx.Request.FormValue("age")
+	if name !="qiangzi" && age !="12346" {
+		c.Ctx.WriteString("对不起，账号或密码错误")
+		return
+	}
+	c.Ctx.WriteString(name)
+	c.Ctx.WriteString(age)
+	c.Ctx.WriteString("登入成功")
+}
+
+ */
+/*
+        /第二种方法
+func (c *MainController) Post()  {
+/respon：结构体
+	var respon models.Respon   //引用结构体
+	data ,err :=ioutil.ReadAll(c.Ctx.Request.Body)
+	if err !=nil {
+		c.Ctx.WriteString("数据获取失败")
+		return
+	}
+	err =json.Unmarshal(data, &respon )//解析数据
+	if err !=nil {
+		c.Ctx.WriteString("数据解析错误")//在postman中 “打印”
+		return
+	}
+	c.Ctx.WriteString("数据解析成功啦！")
+
+}
+ */
