@@ -17,19 +17,22 @@ func init() {
 	config := beego.AppConfig
 	//配置
 	//conf\app.conf
-	dbDriveername := config.String("db_driveerName")
-	dbUser := config.String("db_user")
-	dbPassword := config.String("db_password")
-	dbIp := config.String("db_ip")
-	dbName := config.String("db_name")
+	dbDriveername := config.String("db_driveerName")//mysql
+	dbUser := config.String("db_user")//root
+	dbPassword := config.String("db_password")//123456
+	dbIp := config.String("db_ip")//（127.0.0.1:3306）
+	dbName := config.String("db_name")//数据库名称
 
 	connUrl := dbUser + ":" + dbPassword + "@tcp" + dbIp+"/" + dbName + "?charset=utf8"
+
+	//打开数据库。sql.Open
 	db, err1 := sql.Open(dbDriveername, connUrl)
+	//数据库如果打开错误的话，就没必要继续往下执行了，（执行了也是错的）所以Panic
 	if err1 != nil {
 		//fmt.Println(err1.Error())
 		panic("数据库连接错误，请检查配置")
 	}
-	//为全局变量赋值
+	//为全局变量赋值，连接没有错误就把值给Db这个全局变量
 	Db = db
 	fmt.Println("连接成功咯！！")
 }
@@ -44,6 +47,7 @@ func InserUser(user models.User) (int64, error) {
 	user.Password = hex.EncodeToString(bytes) //hex.EncodeToString:返回十六进制编码
 	fmt.Println("用户名：", user.Usere)
 	//Exec:执行
+	//（insert into 表名 （数据库表中的值） values（有多少值就写多少问号） 实参.值）
 	res, err := Db.Exec("insert into users (users, birthday , address ,nick ,password) values(?,?,?,?,?)", user.Usere, user.Birthday, user.Address, user.Nick, user.Password)
 	//保存数据时遇到错误
 	if err != nil {

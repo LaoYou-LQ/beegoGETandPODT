@@ -28,7 +28,7 @@ func (c *MainController) Get() {
 	}
 	c.Ctx.WriteString("恭喜，数据校验成功。")
 }
-/*     //post第一种方法
+/*     //post第一种方法，返回？
 func (c *MainController) Post()  {
 	//post请求form
 	//var re models.Respon
@@ -45,7 +45,7 @@ func (c *MainController) Post()  {
 
  */
 /*
-        /第二种方法
+        /第二种方法。返回json格式的数据
 func (c *MainController) Post()  {
 /respon：结构体
 	var respon models.Respon   //引用结构体
